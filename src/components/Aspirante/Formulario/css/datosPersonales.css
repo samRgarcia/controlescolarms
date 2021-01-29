@@ -1,0 +1,23 @@
+
+.box-width{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+ .item-nom{
+}
+
+.item-curp {
+
+}
+.item-tel{
+
+}
+
+.item-correo{
+
+}
+
+.sub-item-nombre{
+margin-left: 5px;
+}

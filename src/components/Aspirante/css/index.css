@@ -1,0 +1,32 @@
+.container-aspirante{
+    width: 100%;
+    min-width: 850px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.box-aspirante{
+    min-width: 70%;
+    max-width: 1208px;
+}
+
+@media (max-width: 1024px) {
+    .box-aspirante{
+        min-width: 80%;
+        max-width: 1208px;
+    }
+}
+@media (max-width: 1000px) {
+    .box-aspirante{
+        min-width: 90%;
+        max-width: 1208px;
+    }
+}
+
+@media (max-width: 850px) {
+    .box-aspirante{
+        min-width: 100%;
+        max-width: 1208px;
+    }
+}
