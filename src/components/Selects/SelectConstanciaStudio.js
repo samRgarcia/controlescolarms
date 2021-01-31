@@ -16,8 +16,8 @@ const SelecConstanciaEstudio = ({label = '', ...props}) => {
                 {...props}
             >
                 <option aria-label="None" value=""/>
-                <option value={1}>NA</option>
-                <option value={2}>NA</option>
+                <option value={'SI'}>SI</option>
+                <option value={'NO'}>NO</option>
             </Select>
             <FormHelperText>{meta.touched && meta.error ? meta.error:null}</FormHelperText>
         </FormControl>

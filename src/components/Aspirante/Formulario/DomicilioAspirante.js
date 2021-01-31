@@ -12,6 +12,8 @@ import {ButtonFormulario, Informacion} from "./Informacion";
 
 //setDataState={setDataState} dataState={dataState}
 const Formularios = ({handleNext,setDataState,dataState}) => {
+    const [idEstados, setIdEstados] = React.useState(null);
+
     const handlChange = (values) => {
         setDataState({
             ...dataState,
@@ -36,7 +38,7 @@ const Formularios = ({handleNext,setDataState,dataState}) => {
 
             })}
             onSubmit={(values, {setSubmitting}) => {
-                console.log(JSON.stringify(values, null, 2))
+                //console.log(JSON.stringify(values, null, 2))
                 handlChange(values);
                 setSubmitting(false)
             }}>
@@ -48,11 +50,11 @@ const Formularios = ({handleNext,setDataState,dataState}) => {
                     </div>
                     <div className={'box-width'}>
                         <TextFields label={"Calle y Numero"} name={"calleNumero"} type={"text"} placeholder=".."/>
-                        <SelecEstados label={'Estado*'} name={'estado'}/>
+                        <SelecEstados setIdEstados={setIdEstados} label={'Estado*'} name={'estado'}/>
                     </div>
                     <div className={'box-width'}>
-                        <SelecMunicipio label={'Municipio*'} name={'municipio'}/>
-                        <SelecLocalidad label={'Localidad*'} name={'localidad'}/>
+                        <SelecMunicipio idEstados={idEstados} label={'Municipio*'} name={'municipio'}/>
+                        <TextFields label={'Localidad*'} name={'localidad'}/>
                     </div>
                 </LayoutForm>
                 <ButtonFormulario/>

@@ -16,8 +16,11 @@ const SelecEstadoCivil = ({label = '', ...props}) => {
                 {...props}
             >
                 <option aria-label="None" value=""/>
-                <option value={1}>Soltero</option>
-                <option value={2}>Casado</option>
+                <option value={'Soltero'}>Soltero</option>
+                <option value={'Casado'}>Casado</option>
+                <option value={'Divorciado'}>Divorciado</option>
+                <option value={'Viudo'}>Viudo</option>
+
             </Select>
             <FormHelperText>{meta.touched && meta.error ? meta.error:null}</FormHelperText>
         </FormControl>

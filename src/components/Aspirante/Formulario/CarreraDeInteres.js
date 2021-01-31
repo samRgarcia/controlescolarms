@@ -6,6 +6,7 @@ import LayoutForm from "../../../childrens/LayoutForm";
 import SelecCarreraInteres from "../../Selects/SelectCarreraInteres";
 import {Button} from "@material-ui/core";
 import {ButtonFormulario, Informacion} from "./Informacion";
+import TextFields from "../../TexFields";
 
 //setDataState={setDataState} dataState={dataState}
 const Formularios = ({handleNext,setDataState,dataState}) => {
@@ -22,17 +23,17 @@ const Formularios = ({handleNext,setDataState,dataState}) => {
                 carreraInteres:'',
             }}
             validationSchema={Yup.object({
-                carreraInteres: Yup.number().required('Carrera de insteres requerido'),
+                carreraInteres: Yup.string().required('Carrera de insteres requerido'),
             })}
             onSubmit={(values, {setSubmitting}) => {
-                console.log(JSON.stringify(values, null, 2))
+                //console.log(JSON.stringify(values, null, 2))
                 handlChange(values);
                 setSubmitting(false)
             }}>
             <Form>
                 <LayoutForm>
                     <div className={'box-width'}>
-                        <SelecCarreraInteres label={'Carrera de interes*'} name={'carreraInteres'}/>
+                        <TextFields label={'Carrera de interes*'} name={'carreraInteres'}/>
                     </div>
                 </LayoutForm>
                 <ButtonFormulario/>

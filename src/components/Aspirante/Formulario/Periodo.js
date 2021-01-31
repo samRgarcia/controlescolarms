@@ -28,7 +28,7 @@ const Formularios = ({handleNext, setDataState, dataState}) => {
                 ciclo: Yup.string().required('Ciclo requerido'),
             })}
             onSubmit={(values, {setSubmitting}) => {
-                console.log(JSON.stringify(values, null, 2))
+                //console.log(JSON.stringify(values, null, 2))
                 handlChange(values);
                 setSubmitting(false)
             }}>
