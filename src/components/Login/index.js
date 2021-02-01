@@ -10,17 +10,21 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {useHistory} from "react-router-dom";
+import {Formik, Form} from 'formik';
+import * as Yup from 'yup';
+import TextFields from "../TexFields";
+import axios from "axios";
+import {useSnackbar} from 'notistack';
+import {VALIDAR_LOGIN} from "../../constant";
+
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-            </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
@@ -50,58 +54,72 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
     const classes = useStyles();
     let history = useHistory();
+    const {enqueueSnackbar} = useSnackbar();
 
-    function Redireccion() {
-        history.push('/dashboard')
+    function Redireccion({password,usuario}) {
+        console.log(password,usuario)
+            axios.post(VALIDAR_LOGIN,{
+                usuario:usuario,
+                password:password
+            })
+                .then((res)=>{
+                    //console.log(res)
+                    history.push('/dashboard')
+                })
+                .catch(error=>{
+                    //let messa = error.response.data.message || 'server error';
+                    enqueueSnackbar('Usuario o contraseña incorrecta.',
+                        {
+                            variant: 'warning',
+                            preventDuplicate: true,
+                        })
+                })
     }
 
     return (
         <Container component="main" maxWidth="xs">
-            <CssBaseline />
+            <CssBaseline/>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
+                    <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Administrador
                 </Typography>
-                <form className={classes.form} noValidate>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                    />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    />
-                    <Button
-                        type="button"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        onClick={Redireccion}
+                <div className={classes.form} >
+                    <Formik
+                        initialValues={{password: '', usuario: ''}}
+                        validationSchema={Yup.object({
+                            usuario: Yup.string().required('Ingrese su usuario'),
+                            password: Yup.string().required('Ingrese su contraseña')
+                        })}
+                        onSubmit={(values, {setSubmitting}) => {
+                            //console.log(JSON.stringify(values, null, 2))
+                            Redireccion(values);
+                            setSubmitting(false)
+                        }}
                     >
-                        Sign In
-                    </Button>
+                        <Form>
+                            <TextFields label={'Usuario'} name={"usuario"} type={'text'}/>
+                            <TextFields label={'Contraseña'} name={"password"} type={'password'}/>
+
+                            <FormControlLabel
+                                disabled
+                                control={<Checkbox value="remember" color="primary"/>}
+                                label="Remember me"
+                            />
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                            >
+                                Sign In
+                            </Button>
+                        </Form>
+                    </Formik>
+
                     <Grid container>
                         <Grid item xs>
                             <Link href="#" variant="body2">
@@ -114,10 +132,10 @@ export default function Login() {
                             </Link>
                         </Grid>
                     </Grid>
-                </form>
+                </div>
             </div>
             <Box mt={8}>
-                <Copyright />
+                <Copyright/>
             </Box>
         </Container>
     );

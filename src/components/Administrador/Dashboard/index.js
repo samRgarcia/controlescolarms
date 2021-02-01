@@ -194,7 +194,7 @@ export default function Dash({children}) {
                 </div>
                 <Divider/>
                 <List>
-                    <ListItem button key={'Reporte'} onClick={() => console.log("on")}>
+                    <ListItem button key={'Reporte'} onClick={() => history.push('/reporte/listas')}>
                         <ListItemIcon><InboxIcon/></ListItemIcon>
                         <ListItemText primary={'Reporte'}/>
                     </ListItem>
