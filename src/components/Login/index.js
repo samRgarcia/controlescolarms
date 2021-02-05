@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,14 +12,16 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import {Formik, Form} from 'formik';
 import * as Yup from 'yup';
 import TextFields from "../TexFields";
 import axios from "axios";
 import {useSnackbar} from 'notistack';
 import {VALIDAR_LOGIN} from "../../constant";
-
+import Cookies from 'js-cookie';
+import {useAuth} from '../../Contex/authContext';
+import {setUserID, setToken, decodedToken, isExpired} from '../../services/AuthServices';
 
 function Copyright() {
     return (
@@ -54,26 +56,40 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
     const classes = useStyles();
     let history = useHistory();
+    let location = useLocation();
+    let auth = useAuth();
     const {enqueueSnackbar} = useSnackbar();
+    let {from} = location.state || {from: {pathname: "/"}}
 
-    function Redireccion({password,usuario}) {
-        console.log(password,usuario)
-            axios.post(VALIDAR_LOGIN,{
-                usuario:usuario,
-                password:password
+    useEffect(() => {
+        if (!isExpired()) {
+            history.replace('/login')
+        }
+    }, [])
+
+    function Redireccion({password, usuario}) {
+        axios.post(VALIDAR_LOGIN, {
+            usuario: usuario,
+            password: password
+        })
+            .then((res) => {
+                //console.log(res)
+                setToken(res.data.token);
+                const {userId} = decodedToken();
+                setUserID(userId)
+                history.replace('/dashboard')
+                /*auth.signin(() => {
+                    history.replace(from)
+                })*/
             })
-                .then((res)=>{
-                    //console.log(res)
-                    history.push('/dashboard')
-                })
-                .catch(error=>{
-                    //let messa = error.response.data.message || 'server error';
-                    enqueueSnackbar('Usuario o contraseña incorrecta.',
-                        {
-                            variant: 'warning',
-                            preventDuplicate: true,
-                        })
-                })
+            .catch(error => {
+                //let messa = error.response.data.message || 'server error';
+                enqueueSnackbar('Usuario o contraseña incorrecta.',
+                    {
+                        variant: 'warning',
+                        preventDuplicate: true,
+                    })
+            })
     }
 
     return (
@@ -86,7 +102,7 @@ export default function Login() {
                 <Typography component="h1" variant="h5">
                     Administrador
                 </Typography>
-                <div className={classes.form} >
+                <div className={classes.form}>
                     <Formik
                         initialValues={{password: '', usuario: ''}}
                         validationSchema={Yup.object({

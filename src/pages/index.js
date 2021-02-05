@@ -5,9 +5,11 @@ import Login from "../components/Login";
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 import Administrador from "../components/Administrador";
 import ReportesListas from "../components/Administrador/Reportes";
+import {ProviderAuth} from '../Contex/authContext';
+import {PrivateRouter} from '../childrens/auth';
 const Rutas = () => {
     return (
-        <React.Fragment>
+        <ProviderAuth>
             <Router>
                 <Switch>
                     <Route exact path={'/'}>
@@ -19,15 +21,15 @@ const Rutas = () => {
                     <Route path={'/login'}>
                         <Login/>
                     </Route>
-                    <Route path={'/dashboard'}>
+                    <PrivateRouter path={'/dashboard'}>
                         <Administrador/>
-                    </Route>
-                    <Route path={'/reporte/listas'}>
+                    </PrivateRouter>
+                    <PrivateRouter path={'/reporte/listas'}>
                         <ReportesListas/>
-                    </Route>
+                    </PrivateRouter>
                 </Switch>
             </Router>
-        </React.Fragment>
+        </ProviderAuth>
     )
 }
 export default Rutas;
