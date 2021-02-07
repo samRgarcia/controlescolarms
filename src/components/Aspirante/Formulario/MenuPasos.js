@@ -11,6 +11,7 @@ import DatosPeriodo from "./Periodo";
 import DatosDomicilios from "./DomicilioAspirante";
 import DatosProcedencia from "./EscuelaProcedencia";
 import DatosCarrera from "./CarreraDeInteres";
+import DatosTutor from "./DatosTutor";
 import {useHistory} from 'react-router-dom';
 import axios from "axios";
 import {DOCUMENTO_CONSTANCIA, LISTA_CICLO, REGISTRAR_ASPIRANTE, VALIDAR_CURP} from "../../../constant";
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-    return ['Periodo', 'Datos personales', 'Domicilio', 'Escuela Procedencia', 'Carrera de interés'];
+    return ['Periodo', 'Datos personales', 'Domicilio', 'Escuela Procedencia','Tutor', 'Carrera de interés'];
 }
 
 function getStepContent(stepIndex, handleNext, setDataState, dataState, ciclos, setFilePdf,filePdf) {
@@ -46,6 +47,8 @@ function getStepContent(stepIndex, handleNext, setDataState, dataState, ciclos, 
         case 3:
             return <DatosProcedencia handleNext={handleNext} setDataState={setDataState} dataState={dataState}/>;
         case 4:
+            return <DatosTutor handleNext={handleNext} setDataState={setDataState} dataState={dataState}/>;
+        case 5:
             return <DatosCarrera handleNext={handleNext} setDataState={setDataState} dataState={dataState}/>;
         default:
             return 'Unknown stepIndex';
@@ -62,7 +65,8 @@ export default function MenuPasos() {
         direccion: [],
         infperiodo: [],
         infProcedencia: [],
-        infCarrera: []
+        infCarrera: [],
+        infTutor:[]
     })
     const [activeStep, setActiveStep] = React.useState(0);
     const [isLoader, setIsLoader] = React.useState(false);
