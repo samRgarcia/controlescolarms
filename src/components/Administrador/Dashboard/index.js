@@ -21,6 +21,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import {useHistory} from 'react-router-dom';
 import {useAuth} from '../../../Contex/authContext';
 import {cleanAllAuth} from '../../../services/AuthServices';
+import {DynamicFeed} from "@material-ui/icons";
 
 const drawerWidth = 240;
 
@@ -105,9 +106,9 @@ export default function Dash({children}) {
         setAnchorEl(null);
     };
 
-    const cerrarConecxion=()=>{
-        cleanAllAuth();
-        logOut();
+    const cerrarConecxion = async ()=>{
+        await cleanAllAuth();
+        await logOut();
         history.replace('/login')
     }
 
@@ -202,6 +203,11 @@ export default function Dash({children}) {
                     <ListItem button key={'Reporte'} onClick={() => history.push('/reporte/listas')}>
                         <ListItemIcon><InboxIcon/></ListItemIcon>
                         <ListItemText primary={'Reporte'}/>
+                    </ListItem>
+                    <Divider/>
+                    <ListItem button key={'Catalogos'} onClick={() => history.push('/catalogos')}>
+                        <ListItemIcon><DynamicFeed/></ListItemIcon>
+                        <ListItemText primary={'Catalogos'}/>
                     </ListItem>
                 </List>
                 <Divider/>

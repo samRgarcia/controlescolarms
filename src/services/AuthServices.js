@@ -17,7 +17,7 @@ const initialValues = {
 
 const setToken = (token) => Cookies.set(AUTH_TOKEN, token);
 const getToken = () => Cookies.get(AUTH_TOKEN || '');
-const decodedToken = () => getToken() && jwtDecode(getToken()) || initialValues;
+const decodedToken = async () =>  getToken() && await jwtDecode(getToken()) || initialValues;
 const removeToken = () => Cookies.remove(AUTH_TOKEN);
 const expiresAt = () => new Date(decodedToken().exp * 1000);
 const isExpired = () => new Date() > expiresAt();
@@ -27,12 +27,12 @@ const isValid = () => !isExpired();
 const getUserID = () => Cookies.get(USER_ID) || '';
 const setUserID = (userId) => Cookies.set(USER_ID, userId.toString());
 const removeUserID = () => Cookies.remove(USER_ID);
-const cleanAllAuth = () => {
-    multiRemove([AUTH_TOKEN, USER_ID]);
+const cleanAllAuth = async () => {
+   await multiRemove([AUTH_TOKEN, USER_ID]);
 }
 
-function multiRemove(keys) {
-    keys.forEach(keys => Cookies.remove(keys))
+async function multiRemove(keys) {
+   await keys.forEach(keys => Cookies.remove(keys))
 }
 
 export {

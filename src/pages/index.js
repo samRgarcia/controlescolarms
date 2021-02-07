@@ -7,6 +7,7 @@ import Administrador from "../components/Administrador";
 import ReportesListas from "../components/Administrador/Reportes";
 import {ProviderAuth} from '../Contex/authContext';
 import {PrivateRouter} from '../childrens/auth';
+import AdminCatalogos from "../components/Administrador/Catalogos";
 const Rutas = () => {
     return (
         <ProviderAuth>
@@ -26,6 +27,9 @@ const Rutas = () => {
                     </PrivateRouter>
                     <PrivateRouter path={'/reporte/listas'}>
                         <ReportesListas/>
+                    </PrivateRouter>
+                    <PrivateRouter path={'/catalogos'}>
+                        <AdminCatalogos/>
                     </PrivateRouter>
                 </Switch>
             </Router>

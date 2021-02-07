@@ -1,5 +1,5 @@
 import jsPDF from "jspdf";
-
+import autoTable from "jspdf-autotable";
 const columns = [
     { title: "Nombre",  dataKey: "nombreasp" },
     { title: "Apellido paterno", dataKey: "apepat" },
