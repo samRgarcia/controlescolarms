@@ -9,7 +9,8 @@ import {Button} from "@material-ui/core";
 import {ButtonFormulario, Informacion} from "./Informacion";
 
 //setDataState={setDataState} dataState={dataState}
-const Formularios = ({handleNext, setDataState, dataState}) => {
+const Formularios = ({handleNext, setDataState, dataState,ciclos}) => {
+
     const handlChange = (values) => {
         setDataState({
             ...dataState,
@@ -21,14 +22,14 @@ const Formularios = ({handleNext, setDataState, dataState}) => {
         <Formik
             initialValues={{
                 modalidad: '',
-                ciclo: '',
+                ciclo:'',
             }}
             validationSchema={Yup.object({
                 modalidad: Yup.string().required('Modalidad requerida'),
-                ciclo: Yup.string().required('Ciclo requerido'),
             })}
             onSubmit={(values, {setSubmitting}) => {
-                //console.log(JSON.stringify(values, null, 2))
+                values.ciclo=ciclos.id
+                console.log(values)
                 handlChange(values);
                 setSubmitting(false)
             }}>
@@ -36,7 +37,7 @@ const Formularios = ({handleNext, setDataState, dataState}) => {
                 <LayoutForm>
                     <div className={'box-width'}>
                         <SelecModalidad label={'Modalidad*'} name={'modalidad'}/>
-                        <SelecCiclo label={'Ciclo*'} name={'ciclo'}/>
+                        <VistaClico valueCiclo={ciclos.nombre}/>
                     </div>
                 </LayoutForm>
                 <ButtonFormulario/>
@@ -44,11 +45,14 @@ const Formularios = ({handleNext, setDataState, dataState}) => {
         </Formik>
     )
 }
+function VistaClico({valueCiclo}) {
+    return <h4 style={{width:'100%',textAlign:'center'}}>{valueCiclo || '--'}</h4>
+}
 //setDataState={setDataState} dataState={dataState}
-const DatosPeriodo = ({handleNext, setDataState, dataState}) => {
+const DatosPeriodo = ({handleNext, setDataState, dataState,ciclos}) => {
     return (<div>
         <Informacion/>
-        <Formularios handleNext={handleNext} setDataState={setDataState} dataState={dataState}/>
+        <Formularios handleNext={handleNext} setDataState={setDataState} dataState={dataState} ciclos={ciclos}/>
     </div>)
 }
 

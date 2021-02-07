@@ -19,8 +19,10 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import {Menu,MenuItem} from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import {useHistory} from 'react-router-dom';
-const drawerWidth = 240;
+import {useAuth} from '../../../Contex/authContext';
+import {cleanAllAuth} from '../../../services/AuthServices';
 
+const drawerWidth = 240;
 
 
 const useStyles = makeStyles((theme) => ({
@@ -87,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dash({children}) {
     const classes = useStyles();
+    const {logOut}=useAuth();
     const theme = useTheme();
     let history = useHistory();
     const [open, setOpen] = React.useState(false);
@@ -103,7 +106,9 @@ export default function Dash({children}) {
     };
 
     const cerrarConecxion=()=>{
-        history.push('/login')
+        cleanAllAuth();
+        logOut();
+        history.replace('/login')
     }
 
     const handleDrawerOpen = () => {

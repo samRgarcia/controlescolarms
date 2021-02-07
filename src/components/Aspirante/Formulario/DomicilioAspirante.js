@@ -7,17 +7,18 @@ import TextFields from "../../TexFields";
 import SelecEstados from "../../Selects/SelectEstado";
 import SelecMunicipio from "../../Selects/SelectMunicipio";
 import SelecLocalidad from "../../Selects/SelectLocalidad";
-import {Button} from "@material-ui/core";
+import {Button, IconButton} from "@material-ui/core";
 import {ButtonFormulario, Informacion} from "./Informacion";
+import {PhotoCamera} from "@material-ui/icons";
 
 //setDataState={setDataState} dataState={dataState}
-const Formularios = ({handleNext,setDataState,dataState}) => {
+const Formularios = ({handleNext, setDataState, dataState}) => {
     const [idEstados, setIdEstados] = React.useState(null);
 
     const handlChange = (values) => {
         setDataState({
             ...dataState,
-            direccion:values
+            direccion: values
         })
         handleNext()
     }
@@ -26,10 +27,10 @@ const Formularios = ({handleNext,setDataState,dataState}) => {
             initialValues={{
                 cp: '',
                 colonia: '',
-                calleNumero:'',
-                estado:'',
-                municipio:'',
-                localidad:''
+                calleNumero: '',
+                estado: '',
+                municipio: '',
+                localidad: ''
             }}
             validationSchema={Yup.object({
                 estado: Yup.string().required('Estado requerido'),
@@ -46,7 +47,7 @@ const Formularios = ({handleNext,setDataState,dataState}) => {
                 <LayoutForm>
                     <div className={'box-width'}>
                         <TextFields label={"C.p"} name={"cp"} type={"text"} placeholder=".."/>
-                        <TextFields label={"Colinia"} name={"colonia"} type={"text"} placeholder=".."/>
+                        <TextFields label={"Colonia"} name={"colonia"} type={"text"} placeholder=".."/>
                     </div>
                     <div className={'box-width'}>
                         <TextFields label={"Calle y Numero"} name={"calleNumero"} type={"text"} placeholder=".."/>
@@ -63,8 +64,11 @@ const Formularios = ({handleNext,setDataState,dataState}) => {
         </Formik>
     )
 }
+
+
+
 //setDataState={setDataState} dataState={dataState}
-const DatosDomicilios = ({handleNext,setDataState,dataState}) => {
+const DatosDomicilios = ({handleNext, setDataState, dataState}) => {
     return (<div>
         <Informacion/>
         <Formularios handleNext={handleNext} setDataState={setDataState} dataState={dataState}/>

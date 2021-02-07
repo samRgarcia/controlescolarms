@@ -5,7 +5,8 @@ import Typography from './Typography';
 import ProductHeroLayout from './ProductHeroLayout';
 import {useHistory} from 'react-router-dom'
 import Backg from '../../Img/back.jpg';
-let imgs ="https://pixabay.com/get/g9e84141a2a8f0b8e756ab4051c7e775ba917ebc7dbfd7afa9e186e84e23b4738ccc39eaa46116e3f0ca0e6bca5b01bdf_1280.jpg"
+import Logos from '../../Img/back.jpg';
+
 const backgroundImage = Backg;
     //'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
 
@@ -40,9 +41,9 @@ function ProductHero(props) {
     return (
         <ProductHeroLayout backgroundClassName={classes.background}>
             {/* Increase the network loading priority of the background image. */}
-            <img style={{display: 'none'}} src={backgroundImage} alt="increase priority"/>
-            <Typography color="inherit" align="center" variant="h2" marked="center">
-                PREINSCRIPCIONES SEMESTRE AGOSTO 2021
+            {/*<img style={{display: 'none'}} src={backgroundImage} alt="increase priority"/>*/}
+            <Typography color="inherit" align="center" variant="h3" marked="center">
+                SISTEMA DE PREINSCRIPCIONES EN LINEA CICLO 2021-2022
             </Typography>
             <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
                 ...

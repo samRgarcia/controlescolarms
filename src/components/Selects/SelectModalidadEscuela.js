@@ -5,20 +5,20 @@ import Select from '@material-ui/core/Select';
 import {useField} from "formik";
 import {FormHelperText} from "@material-ui/core";
 import axios from "axios";
-import {LISTA_CARRERAS_INTERES} from "../../constant";
+import {LISTA_MODALIDAD, LISTA_MODALIDAD_ESCUELA} from "../../constant";
 
-const SelecCarreraInteres = ({label = '', ...props}) => {
+const SelecModalidadEscuela = ({label = '', ...props}) => {
     const [field, meta] = useField(props);
-    const [carreras,setCarreras]=React.useState([]);
+    const [modalida,setModalidad] = React.useState([])
+
     useEffect(()=>{
-        axios.get(LISTA_CARRERAS_INTERES,{
-            params:{
-                idCebetas:1
-            }
-        })
-            .then(res=>setCarreras(res.data))
-            .catch(error=>console.log(error))
+        axios.get(LISTA_MODALIDAD_ESCUELA)
+            .then(res=>{
+                setModalidad(res.data)
+            })
+            .catch(err=>console.log(err))
     },[])
+
     return (
         <FormControl style={{marginLeft:'5px'}} fullWidth error={meta.touched && meta.error ? true:false}>
             <InputLabel htmlFor="age-native-simple">{label}</InputLabel>
@@ -29,7 +29,9 @@ const SelecCarreraInteres = ({label = '', ...props}) => {
             >
                 <option aria-label="None" value=""/>
                 {
-                    carreras.map(item=><option key={item.idcarreras} value={item.idcarreras}>{item.descripcion}</option>)
+                    modalida.map(item=>{
+                        return <option key={item.idmodalidad} value={item.idmodalidad}>{item.descripcion}</option>
+                    })
                 }
             </Select>
             <FormHelperText>{meta.touched && meta.error ? meta.error:null}</FormHelperText>
@@ -37,4 +39,4 @@ const SelecCarreraInteres = ({label = '', ...props}) => {
     )
 }
 
-export default SelecCarreraInteres;
+export default SelecModalidadEscuela;

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Logo from '../../Img/logo.png';
 
 const styles = (theme) => ({
     root: {
@@ -11,13 +12,13 @@ const styles = (theme) => ({
         display: 'flex',
         alignItems: 'center',
         [theme.breakpoints.up('sm')]: {
-            height: '80vh',
+            height: '100vh',
             minHeight: 500,
             maxHeight: 1300,
         },
     },
     container: {
-        marginTop: theme.spacing(3),
+        marginTop: '140px',
         marginBottom: theme.spacing(14),
         display: 'flex',
         flexDirection: 'column',
@@ -55,12 +56,12 @@ function ProductHeroLayout(props) {
     return (
         <section className={classes.root}>
             <Container className={classes.container}>
-                {/*<img
-                    src="/static/themes/onepirate/productHeroWonder.png"
+                <img
+                    src={Logo}
                     alt="wonder"
                     width="147"
-                    height="80"
-                />*/}
+                    height="180"
+                />
                 {children}
                 <div className={classes.backdrop} />
                 <div className={clsx(classes.background, backgroundClassName)} />

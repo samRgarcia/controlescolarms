@@ -33,7 +33,7 @@ const Formularios = ({handleNext,setDataState,dataState}) => {
             <Form>
                 <LayoutForm>
                     <div className={'box-width'}>
-                        <TextFields label={'Carrera de interes*'} name={'carreraInteres'}/>
+                        <SelecCarreraInteres label={'Carrera de interes*'} name={'carreraInteres'}/>
                     </div>
                 </LayoutForm>
                 <ButtonFormulario/>

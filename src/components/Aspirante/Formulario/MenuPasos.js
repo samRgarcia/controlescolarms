@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -6,13 +6,14 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import DatosPersonales from "./DatosPersonales";
+import {useSnackbar} from 'notistack';
 import DatosPeriodo from "./Periodo";
 import DatosDomicilios from "./DomicilioAspirante";
 import DatosProcedencia from "./EscuelaProcedencia";
 import DatosCarrera from "./CarreraDeInteres";
 import {useHistory} from 'react-router-dom';
 import axios from "axios";
-import {REGISTRAR_ASPIRANTE, VALIDAR_CURP} from "../../../constant";
+import {DOCUMENTO_CONSTANCIA, LISTA_CICLO, REGISTRAR_ASPIRANTE, VALIDAR_CURP} from "../../../constant";
 import Loader from '../../Loader';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,12 +33,14 @@ function getSteps() {
     return ['Periodo', 'Datos personales', 'Domicilio', 'Escuela Procedencia', 'Carrera de interés'];
 }
 
-function getStepContent(stepIndex, handleNext, setDataState, dataState) {
+function getStepContent(stepIndex, handleNext, setDataState, dataState, ciclos, setFilePdf,filePdf) {
     switch (stepIndex) {
         case 0:
-            return <DatosPeriodo handleNext={handleNext} setDataState={setDataState} dataState={dataState}/>;
+            return <DatosPeriodo handleNext={handleNext} setDataState={setDataState} dataState={dataState}
+                                 ciclos={ciclos}/>;
         case 1:
-            return <DatosPersonales handleNext={handleNext} setDataState={setDataState} dataState={dataState}/>;
+            return <DatosPersonales handleNext={handleNext} setDataState={setDataState} dataState={dataState}
+                                    setFilePdf={setFilePdf} filePdf={filePdf}/>;
         case 2:
             return <DatosDomicilios handleNext={handleNext} setDataState={setDataState} dataState={dataState}/>;
         case 3:
@@ -52,6 +55,8 @@ function getStepContent(stepIndex, handleNext, setDataState, dataState) {
 export default function MenuPasos() {
     const classes = useStyles();
     let history = useHistory();
+    const {enqueueSnackbar} = useSnackbar();
+
     const [dataState, setDataState] = React.useState({
         infoPersonal: [],
         direccion: [],
@@ -61,15 +66,30 @@ export default function MenuPasos() {
     })
     const [activeStep, setActiveStep] = React.useState(0);
     const [isLoader, setIsLoader] = React.useState(false);
+    const [ciclos, setCiclos] = React.useState('');
+    const [filePdf, setFilePdf] = React.useState(null);
+
     const steps = getSteps();
+    //let data = new FormData();
 
     const handleNext = () => {
+
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
+    useEffect(() => {
+        axios.get(LISTA_CICLO, {params: {idCbtas: 1}})
+            .then(res => {
+                const [data] = res.data;
+                setCiclos({
+                    nombre: data?.nomciclo,
+                    id: data?.id
+                })
+            }).catch(error => console.log(error))
+    }, [])
 
-    const handleBack = () => {
+    /*const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
+    };*/
 
     const handleReset = async () => {
         // TODO: Enviar la informacion al back y confirmar
@@ -80,11 +100,38 @@ export default function MenuPasos() {
         if (opcionCurp) {
             await axios.post(REGISTRAR_ASPIRANTE, {
                 registro: dataState
-            }).then(() => alert("Tus datos fueron registrados correctamente"))
-                .catch((error) => alert(error))
+            }).then((res) => {
+                //data.append('pdfs',fs.createReadStream(filePdf));
+                //data.append('folio',res.data.folio)
+                let data = new FormData();
+                data.append('pdfs', filePdf[0]);
+                data.append('folio', res.data.folio);
+                axios.post(DOCUMENTO_CONSTANCIA, data,
+                    {headers: {'Content-Type': 'multipart/form-data'}}
+                ).then(() => {
+                    enqueueSnackbar("Tus datos fueron registrados correctamente",
+                        {
+                            variant: 'success',
+                            preventDuplicate: true,
+                        })
+                }).catch(() => {
+                    enqueueSnackbar("Inténtelo más tarde, el servicio no está disponible.",
+                        {
+                            variant: 'error',
+                            preventDuplicate: true,
+                        })
+                })
+            })
+                .catch(() => {
+                    enqueueSnackbar("Inténtelo más tarde, el servicio no está disponible.",
+                        {
+                            variant: 'error',
+                            preventDuplicate: true,
+                        })
+                })
                 .finally(setIsLoader(false))
         } else {
-            alert(`La curp: ${dataState.infoPersonal.curp} ,ya esta registrada`)
+            alert(`La curp: ${dataState.infoPersonal.curp} ,ya fue registrada anteriormente`)
         }
         setIsLoader(false)
         history.push('/')
@@ -111,7 +158,7 @@ export default function MenuPasos() {
                     ) : (
                         <div>
                             <Typography
-                                className={classes.instructions}>{getStepContent(activeStep, handleNext, setDataState, dataState)}</Typography>
+                                className={classes.instructions}>{getStepContent(activeStep, handleNext, setDataState, dataState, ciclos, setFilePdf,filePdf)}</Typography>
                             {/*<div>
                             <Button
                                 disabled={activeStep === 0}

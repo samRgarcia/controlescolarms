@@ -20,8 +20,10 @@ export default function TextFields({label = '', ...props}) {
     return (
         <>
             <TextField
+                InputLabelProps={{shrink:true}}
                 style={{marginLeft:'5px'}}
                 fullWidth
+
                 error={meta.touched && meta.error ? true : false}
                 label={label}
                 {...field}

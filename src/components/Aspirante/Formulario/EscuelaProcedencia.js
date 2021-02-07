@@ -9,6 +9,7 @@ import SelecMunicipio from "../../Selects/SelectMunicipio";
 import SelecRegimen from "../../Selects/SelectRegimen";
 import {Button} from "@material-ui/core";
 import {ButtonFormulario, Informacion} from "./Informacion";
+import SelecModalidadEscuela from "../../Selects/SelectModalidadEscuela";
 
 //setDataState={setDataState} dataState={dataState}
 const Formularios = ({handleNext,setDataState,dataState}) => {
@@ -48,7 +49,7 @@ const Formularios = ({handleNext,setDataState,dataState}) => {
                         <SelecMunicipio idEstados={idEstados} label={'Municipio*'} name={'municipio'}/>
                     </div>
                     <div className={'box-width'}>
-                        <SelecModalidad label={'Modalidad*'} name={'modalidad'}/>
+                        <SelecModalidadEscuela label={'Modalidad*'} name={'modalidad'}/>
                         <SelecRegimen label={'Régimen*'} name={'regimen'}/>
                     </div>
                 </LayoutForm>

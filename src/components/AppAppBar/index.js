@@ -8,6 +8,12 @@ import {Link} from 'react-router-dom';
 const styles = (theme) => ({
     title: {
         fontSize: 24,
+        '@media (max-width: 950px)':{
+            fontSize: 18,
+        },
+        '@media (max-width: 762px)':{
+            fontSize: 10,
+        }
     },
     placeholder: toolbarStyles(theme).root,
     toolbar: {
@@ -25,9 +31,13 @@ const styles = (theme) => ({
         justifyContent: 'flex-end',
     },
     rightLink: {
+        textDecoration:'none',
         fontSize: 16,
         color: theme.palette.common.white,
         marginLeft: theme.spacing(3),
+        '@media (max-width: 762px)':{
+            fontSize: 10,
+        }
     },
     linkSecondary: {
         color: theme.palette.secondary.main,
@@ -39,15 +49,15 @@ function AppAppBar(props) {
 
     return (
         <div>
-            <AppBar position="fixed">
-                <Toolbar size={'small'}  className={classes.toolbar}>
+            <AppBar position="fixed" color={'default'} style={{background:"#28282a"}}>
+                <Toolbar  size={'small'}  className={classes.toolbar}>
                     <div className={classes.left} />
                     <h6
                         underline="none"
                         color="inherit"
                         className={classes.title}
                     >
-                        {'Control escolar'}
+                        {'CENTRO DE BACHILLERATO TECNOLOGICO AGROPECUARIO No. 265'}
                     </h6>
                     <div className={classes.right}>
                         <Link

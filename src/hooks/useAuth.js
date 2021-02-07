@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect} from "react";
-import {getUserID, getToken, isValid} from '../services/AuthServices';
+//import {getUserID, getToken, isValid} from '../services/AuthServices';
 import axios from "axios";
 
 const fakeAuth = {
@@ -21,17 +21,17 @@ export function useProviderAuth() {
     const [logged, setLogged] =React.useState(false);
 
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         axios.defaults.headers.common['Authorization']=`Bearer ${getToken()}`;
         setUser(getUserID());
         setLogged(isValid());
 
-    },[])
+    },[])*/
 
-    const logOut = useCallback(()=>{
+    /*const logOut = useCallback(()=>{
         setLogged(false);
         setUser(undefined);
-    },[setUser,setLogged])
+    },[setUser,setLogged])*/
 
     /*const signin = cb => {
         return fakeAuth.signin(() => {
@@ -47,7 +47,5 @@ export function useProviderAuth() {
         })
     };*/
     return {
-        user,
-        logOut
     };
 }
