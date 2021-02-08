@@ -4,12 +4,8 @@ import * as Yup from 'yup';
 import './css/datosPersonales.css'
 import LayoutForm from "../../../childrens/LayoutForm";
 import TextFields from "../../TexFields";
-import SelecEstados from "../../Selects/SelectEstado";
-import SelecMunicipio from "../../Selects/SelectMunicipio";
-import SelecLocalidad from "../../Selects/SelectLocalidad";
 import {ButtonFormulario, Informacion} from "./Informacion";
 
-//setDataState={setDataState} dataState={dataState}
 const Formularios = ({handleNext, setDataState, dataState}) => {
 
     const handlChange = (values) => {
@@ -34,7 +30,6 @@ const Formularios = ({handleNext, setDataState, dataState}) => {
 
             })}
             onSubmit={(values, {setSubmitting}) => {
-                //console.log(JSON.stringify(values, null, 2))
                 handlChange(values);
                 setSubmitting(false)
             }}>

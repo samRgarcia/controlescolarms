@@ -6,12 +6,8 @@ import LayoutForm from "../../../childrens/LayoutForm";
 import TextFields from "../../TexFields";
 import SelecEstados from "../../Selects/SelectEstado";
 import SelecMunicipio from "../../Selects/SelectMunicipio";
-import SelecLocalidad from "../../Selects/SelectLocalidad";
-import {Button, IconButton} from "@material-ui/core";
 import {ButtonFormulario, Informacion} from "./Informacion";
-import {PhotoCamera} from "@material-ui/icons";
 
-//setDataState={setDataState} dataState={dataState}
 const Formularios = ({handleNext, setDataState, dataState}) => {
     const [idEstados, setIdEstados] = React.useState(null);
 

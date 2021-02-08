@@ -11,7 +11,6 @@ export async function dataComprobante(folio=42) {
         }
     })
         .then(res=>{
-            console.log(res.data)
             pdfComprobanteAspirantes(res.data)
         })
         .catch(error=>console.log(error))

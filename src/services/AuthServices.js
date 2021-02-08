@@ -24,7 +24,6 @@ const removeToken = () => Cookies.remove(AUTH_TOKEN);
 const expiresAt =  () =>  new Date(decodedToken().exp * 1000);
 const isExpired =  () =>  new Date() > expiresAt();
 const isValid =  () => {
-    console.log("expe",isExpired())
     return  !isExpired()
 };
 

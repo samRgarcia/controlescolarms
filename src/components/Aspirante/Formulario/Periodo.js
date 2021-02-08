@@ -4,8 +4,6 @@ import * as Yup from 'yup';
 import './css/datosPersonales.css'
 import LayoutForm from "../../../childrens/LayoutForm";
 import SelecModalidad from "../../Selects/SelectModalidad";
-import SelecCiclo from "../../Selects/SelectCiclo";
-import {Button} from "@material-ui/core";
 import {ButtonFormulario, Informacion} from "./Informacion";
 
 //setDataState={setDataState} dataState={dataState}

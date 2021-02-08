@@ -3,11 +3,9 @@ import {Formik, Form} from 'formik';
 import * as Yup from 'yup';
 import './css/datosPersonales.css'
 import LayoutForm from "../../../childrens/LayoutForm";
-import SelecModalidad from "../../Selects/SelectModalidad";
 import SelecEstados from "../../Selects/SelectEstado";
 import SelecMunicipio from "../../Selects/SelectMunicipio";
 import SelecRegimen from "../../Selects/SelectRegimen";
-import {Button} from "@material-ui/core";
 import {ButtonFormulario, Informacion} from "./Informacion";
 import SelecModalidadEscuela from "../../Selects/SelectModalidadEscuela";
 
