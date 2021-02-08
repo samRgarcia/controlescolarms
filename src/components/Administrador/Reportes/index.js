@@ -4,6 +4,6 @@ import Dashboard from "../Dashboard/index";
 
 export default function ReportesListas() {
     return <Dashboard>
-                <ListTabla/>
-             </Dashboard>
+        <ListTabla/>
+    </Dashboard>
 }

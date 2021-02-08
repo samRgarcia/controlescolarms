@@ -16,6 +16,7 @@ import {useHistory} from 'react-router-dom';
 import axios from "axios";
 import {DOCUMENTO_CONSTANCIA, LISTA_CICLO, REGISTRAR_ASPIRANTE, VALIDAR_CURP} from "../../../constant";
 import Loader from '../../Loader';
+import {dataComprobante} from '../Reportes/comprobante';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,10 +32,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-    return ['Periodo', 'Datos personales', 'Domicilio', 'Escuela Procedencia','Tutor', 'Carrera de interés'];
+    return ['Periodo', 'Datos personales', 'Domicilio', 'Escuela Procedencia', 'Tutor', 'Carrera de interés'];
 }
 
-function getStepContent(stepIndex, handleNext, setDataState, dataState, ciclos, setFilePdf,filePdf) {
+function getStepContent(stepIndex, handleNext, setDataState, dataState, ciclos, setFilePdf, filePdf) {
     switch (stepIndex) {
         case 0:
             return <DatosPeriodo handleNext={handleNext} setDataState={setDataState} dataState={dataState}
@@ -66,7 +67,7 @@ export default function MenuPasos() {
         infperiodo: [],
         infProcedencia: [],
         infCarrera: [],
-        infTutor:[]
+        infTutor: []
     })
     const [activeStep, setActiveStep] = React.useState(0);
     const [isLoader, setIsLoader] = React.useState(false);
@@ -108,16 +109,20 @@ export default function MenuPasos() {
                 //data.append('pdfs',fs.createReadStream(filePdf));
                 //data.append('folio',res.data.folio)
                 let data = new FormData();
+                let FOLIO = res.data.folio;
                 data.append('pdfs', filePdf[0]);
-                data.append('folio', res.data.folio);
+                data.append('folio', FOLIO);
                 axios.post(DOCUMENTO_CONSTANCIA, data,
                     {headers: {'Content-Type': 'multipart/form-data'}}
                 ).then(() => {
-                    enqueueSnackbar("Tus datos fueron registrados correctamente",
-                        {
-                            variant: 'success',
-                            preventDuplicate: true,
-                        })
+                    //TODO:Imprimir pdf
+                    dataComprobante(FOLIO).then(() => {
+                        enqueueSnackbar("Tus datos fueron registrados correctamente",
+                            {
+                                variant: 'success',
+                                preventDuplicate: true,
+                            })
+                    }).catch(() => alert("No pudimos generar tu comprobante"))
                 }).catch(() => {
                     enqueueSnackbar("Inténtelo más tarde, el servicio no está disponible.",
                         {
@@ -162,7 +167,7 @@ export default function MenuPasos() {
                     ) : (
                         <div>
                             <Typography
-                                className={classes.instructions}>{getStepContent(activeStep, handleNext, setDataState, dataState, ciclos, setFilePdf,filePdf)}</Typography>
+                                className={classes.instructions}>{getStepContent(activeStep, handleNext, setDataState, dataState, ciclos, setFilePdf, filePdf)}</Typography>
                             {/*<div>
                             <Button
                                 disabled={activeStep === 0}

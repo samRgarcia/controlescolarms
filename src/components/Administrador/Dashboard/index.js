@@ -16,7 +16,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import {Menu,MenuItem} from '@material-ui/core';
+import {Menu, MenuItem} from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import {useHistory} from 'react-router-dom';
 import {useAuth} from '../../../Contex/authContext';
@@ -90,12 +90,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dash({children}) {
     const classes = useStyles();
-    const {logOut}=useAuth();
+    const {logOut} = useAuth();
     const theme = useTheme();
     let history = useHistory();
     const [open, setOpen] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const isMenu=Boolean(anchorEl);
+    const isMenu = Boolean(anchorEl);
 
 
     const handleMenu = (event) => {
@@ -106,9 +106,9 @@ export default function Dash({children}) {
         setAnchorEl(null);
     };
 
-    const cerrarConecxion = async ()=>{
-        await cleanAllAuth();
-        await logOut();
+    const cerrarConecxion = async () => {
+         cleanAllAuth();
+         logOut();
         history.replace('/login')
     }
 
@@ -146,9 +146,11 @@ export default function Dash({children}) {
                         Control escolar
                     </Typography>
 
-                    <div style={{display: 'flex',
+                    <div style={{
+                        display: 'flex',
                         width: '100%',
-                        justifyContent: 'flex-end'}}>
+                        justifyContent: 'flex-end'
+                    }}>
                         <IconButton
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
@@ -156,7 +158,7 @@ export default function Dash({children}) {
                             onClick={handleMenu}
                             color="inherit"
                         >
-                            <AccountCircle />
+                            <AccountCircle/>
                         </IconButton>
                         <Menu
                             id="menu-appbar"

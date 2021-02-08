@@ -8,6 +8,7 @@ import ReportesListas from "../components/Administrador/Reportes";
 import {ProviderAuth} from '../Contex/authContext';
 import {PrivateRouter} from '../childrens/auth';
 import AdminCatalogos from "../components/Administrador/Catalogos";
+
 const Rutas = () => {
     return (
         <ProviderAuth>

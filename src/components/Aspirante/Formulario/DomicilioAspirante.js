@@ -33,8 +33,8 @@ const Formularios = ({handleNext, setDataState, dataState}) => {
                 localidad: ''
             }}
             validationSchema={Yup.object({
-                estado: Yup.string().required('Estado requerido'),
-                municipio: Yup.string().required('Municipio requerido'),
+                estado: Yup.number().required('Estado requerido'),
+                municipio: Yup.number().required('Municipio requerido'),
                 localidad: Yup.string().required('Localidad requerido'),
 
             })}

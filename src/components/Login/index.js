@@ -11,14 +11,14 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {Formik, Form} from 'formik';
 import * as Yup from 'yup';
 import TextFields from "../TexFields";
 import axios from "axios";
 import {useSnackbar} from 'notistack';
 import {VALIDAR_LOGIN} from "../../constant";
-import {setUserID, setToken, decodedToken} from '../../services/AuthServices';
+import {setUserID, setToken, decodedToken, isExpired} from '../../services/AuthServices';
 
 function Copyright() {
     return (
@@ -55,11 +55,11 @@ export default function Login() {
     let history = useHistory();
     const {enqueueSnackbar} = useSnackbar();
 
-    /*useEffect(() => {
+    useEffect(() => {
         if (!isExpired()) {
             history.replace('/login')
         }
-    }, [])*/
+    }, [])
 
     const Redireccion = React.useCallback(async ({password, usuario}) => {
         try {

@@ -6,7 +6,7 @@ const authContext = React.createContext();
 
 export function ProviderAuth({children}) {
     const [loading, setLoading] = React.useState(true);
-    const [user, setUser] = React.useState(false)
+    const [user, setUser] = React.useState(undefined)
     const [logged, setLogged] = React.useState(false);
     //const auth = useProviderAuth();
     const checkAuth = useCallback(() => {
@@ -37,7 +37,6 @@ export function ProviderAuth({children}) {
     }, [loading]);
 
     const loggedUserID = useMemo(() => {
-        console.log(user)
         return user;
     }, [user])
 

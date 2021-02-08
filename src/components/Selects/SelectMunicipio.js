@@ -33,8 +33,6 @@ const SelecMunicipio = ({idEstados,label = '', ...props}) => {
                         return  <option key={item.idMunicipio} value={item.idMunicipio}>{item.nombreMunicipio}</option>
                     })
                 }
-                <option value={1}>Balancan</option>
-                <option value={2}>...</option>
             </Select>
             <FormHelperText>{meta.touched && meta.error ? meta.error : null}</FormHelperText>
         </FormControl>

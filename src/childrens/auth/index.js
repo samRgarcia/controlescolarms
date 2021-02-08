@@ -10,6 +10,10 @@ export function PrivateRouter({children, ...rest}) {
 
     useEffect(() => {
         checkAuth();
+        console.log('authLoading',!authLoading)
+        console.log('isLoggedIn',!isLoggedIn)
+
+        console.log("------",!authLoading && !isLoggedIn)
         if (!authLoading && !isLoggedIn) {
             history.replace('/login')
             setShouldRender(false)

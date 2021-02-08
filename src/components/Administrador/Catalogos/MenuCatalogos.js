@@ -6,6 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import CatCiclo from "./Item/CatCiclo";
+import CatModalidad from "./Item/CatModalidad";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -75,7 +76,7 @@ export default function MenuCatalogos() {
                 <Tab label="Estado civil" {...a11yProps(2)} />
             </Tabs>
             <TabPanel value={value} index={0}>
-                Item One
+                <CatModalidad/>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <CatCiclo/>
