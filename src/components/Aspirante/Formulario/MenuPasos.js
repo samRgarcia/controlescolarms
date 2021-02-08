@@ -108,14 +108,32 @@ export default function MenuPasos() {
             }).then((res) => {
                 //data.append('pdfs',fs.createReadStream(filePdf));
                 //data.append('folio',res.data.folio)
-                let data = new FormData();
-                let FOLIO = res.data.folio;
-                data.append('pdfs', filePdf[0]);
-                data.append('folio', FOLIO);
-                axios.post(DOCUMENTO_CONSTANCIA, data,
-                    {headers: {'Content-Type': 'multipart/form-data'}}
-                ).then(() => {
+                if (filePdf) {
+                    let data = new FormData();
+                    let FOLIO = res.data.folio;
+                    data.append('pdfs', filePdf[0]);
+                    data.append('folio', FOLIO);
+                    axios.post(DOCUMENTO_CONSTANCIA, data,
+                        {headers: {'Content-Type': 'multipart/form-data'}}
+                    ).then(() => {
+                        //TODO:Imprimir pdf
+                        dataComprobante(FOLIO).then(() => {
+                            enqueueSnackbar("Tus datos fueron registrados correctamente",
+                                {
+                                    variant: 'success',
+                                    preventDuplicate: true,
+                                })
+                        }).catch(() => alert("No pudimos generar tu comprobante"))
+                    }).catch(() => {
+                        enqueueSnackbar("Inténtelo más tarde, el servicio no está disponible.",
+                            {
+                                variant: 'error',
+                                preventDuplicate: true,
+                            })
+                    })
+                } else {
                     //TODO:Imprimir pdf
+                    let FOLIO = res.data.folio;
                     dataComprobante(FOLIO).then(() => {
                         enqueueSnackbar("Tus datos fueron registrados correctamente",
                             {
@@ -123,15 +141,11 @@ export default function MenuPasos() {
                                 preventDuplicate: true,
                             })
                     }).catch(() => alert("No pudimos generar tu comprobante"))
-                }).catch(() => {
-                    enqueueSnackbar("Inténtelo más tarde, el servicio no está disponible.",
-                        {
-                            variant: 'error',
-                            preventDuplicate: true,
-                        })
-                })
+                }
+
             })
-                .catch(() => {
+                .catch((e) => {
+                    console.log(e)
                     enqueueSnackbar("Inténtelo más tarde, el servicio no está disponible.",
                         {
                             variant: 'error',
@@ -141,8 +155,8 @@ export default function MenuPasos() {
                 .finally(setIsLoader(false))
         } else {
             alert(`La curp: ${dataState.infoPersonal.curp} ,ya fue registrada anteriormente`)
+            setIsLoader(false)
         }
-        setIsLoader(false)
         history.push('/')
         setActiveStep(0);
     };
@@ -162,7 +176,7 @@ export default function MenuPasos() {
                     {activeStep === steps.length ? (
                         <div style={{textAlign: 'center'}}>
                             <Typography className={classes.instructions}>Confirma para enviar tus datos</Typography>
-                            <Button color={"secondary"} onClick={handleReset}>Enviar</Button>
+                            <Button disabled={isLoader} color={"secondary"} onClick={handleReset}>Enviar</Button>
                         </div>
                     ) : (
                         <div>

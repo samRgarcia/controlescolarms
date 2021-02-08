@@ -1,12 +1,15 @@
-import React from "react";
+import React, {useMemo} from "react";
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {useField} from "formik";
 import {FormHelperText} from "@material-ui/core";
 
-const SelecConstanciaEstudio = ({label = '', ...props}) => {
+const SelecConstanciaEstudio = ({label = '',setIsConstancia, ...props}) => {
     const [field, meta] = useField(props);
+    useMemo(() => {
+        field.value && setIsConstancia(field.value);
+    }, [field.value])
     return (
         <FormControl style={{marginLeft:'5px'}} fullWidth error={meta.touched && meta.error ? true:false}>
             <InputLabel htmlFor="age-native-simple">{label}</InputLabel>

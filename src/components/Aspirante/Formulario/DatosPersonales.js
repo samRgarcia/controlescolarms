@@ -12,9 +12,11 @@ import {ButtonFormulario, Informacion} from "./Informacion";
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import {Button} from "@material-ui/core";
+import SelecConstanciaEstudio from "../../Selects/SelectConstanciaStudio";
 
 const Formularios = ({handleNext, setDataState, dataState,setFilePdf,filePdf}) => {
     const [idEstados, setIdEstados] = React.useState(null);
+    const [isConstancia,setIsConstancia]=React.useState('NO')
     const handlChange = (values) => {
         setDataState({...dataState, infoPersonal: values})
         handleNext()
@@ -51,9 +53,10 @@ const Formularios = ({handleNext, setDataState, dataState,setFilePdf,filePdf}) =
                 estadoNacimiento: Yup.number().required('Estado requerido'),
                 municipioNacimiento: Yup.number().required('Municipio requerido'),
                 localidadDeNacimiento: Yup.string().required('Localidad requerido'),
-               // constanciaEstudio: Yup.string().required('Requerido'),
+                constanciaEstudio: Yup.string().required('Requerido'),
                 estadoCivil: Yup.string().required('Requerido'),
                 fechaNacimiento: Yup.date().required('Fecha requerida'),
+                correo:Yup.string().required('Correo requerido'),
                 curp: Yup.string().required('Curp requerido').matches(`^[A-Z]{1}[AEIOU]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$`, 'Invalidad'),
             })}
             onSubmit={(values, {setSubmitting}) => {
@@ -99,11 +102,11 @@ const Formularios = ({handleNext, setDataState, dataState,setFilePdf,filePdf}) =
                     </div>
                     <div className={'box-width'}>
                         <SelecEstadoCivil label={'Estado civil*'} name={'estadoCivil'}/>
-                        {/*<SelecConstanciaEstudio label={'Constancia de estudio*'} name={'constanciaEstudio'}/>*/}
-                        <SubirArchivosPdf setFilePdf={setFilePdf} filePdf={filePdf} />
+                        <SelecConstanciaEstudio setIsConstancia={setIsConstancia} label={'Constancia de estudio*'} name={'constanciaEstudio'}/>
+                        {isConstancia ==='SI' ? <SubirArchivosPdf setFilePdf={setFilePdf} filePdf={filePdf}/>:null}
                     </div>
                 </LayoutForm>
-                <ButtonFormulario isDisabled={filePdf ? false:true} />
+                <ButtonFormulario/>
             </Form>
         </Formik>
     )

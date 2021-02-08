@@ -20,7 +20,6 @@ const SelecEstados = ({setIdEstados,label = '', ...props}) => {
 
     useMemo(() => {
         field.value && setIdEstados(field.value);
-        console.log(field.value)
     }, [field.value])
 
     return (

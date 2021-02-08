@@ -27,7 +27,6 @@ const Formularios = ({handleNext, setDataState, dataState,ciclos}) => {
             })}
             onSubmit={(values, {setSubmitting}) => {
                 values.ciclo=ciclos.id
-                console.log(values)
                 handlChange(values);
                 setSubmitting(false)
             }}>

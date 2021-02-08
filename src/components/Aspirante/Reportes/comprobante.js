@@ -4,7 +4,7 @@ import {logoSep} from './img';
 import axios from "axios";
 import {DOCUMENTO_COMPROBATE} from "../../../constant";
 
-export async function dataComprobante(folio=42) {
+export async function dataComprobante(folio) {
     await axios.get(DOCUMENTO_COMPROBATE,{
         params:{
             folio:folio
