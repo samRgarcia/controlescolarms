@@ -113,7 +113,8 @@ const Formularios = ({handleNext, setDataState, dataState, setFilePdf, filePdf})
                         {isConstancia === 'SI' ? <SubirArchivosPdf setFilePdf={setFilePdf} filePdf={filePdf}/> : null}
                     </div>
                 </LayoutForm>
-                <ButtonFormulario/>
+                <ButtonFormulario
+                    isDisabled={Boolean(filePdf) && isConstancia === 'SI' ? false : isConstancia === 'NO' ? false : true}/>
             </Form>
         </Formik>
     )

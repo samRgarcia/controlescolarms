@@ -5,13 +5,17 @@ import Typography from './Typography';
 import ProductHeroLayout from './ProductHeroLayout';
 import {useHistory} from 'react-router-dom'
 import Backg from '../../Img/back.jpg';
-import Logos from '../../Img/back.jpg';
-import {Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle     } from '@material-ui/core';
+import {
+    Button as ButtonM,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle
+} from '@material-ui/core';
 import * as Yup from "yup";
 import {Form, Formik} from "formik";
 import LayoutForm from "../../childrens/LayoutForm";
-import SelecCiclo from "../Selects/SelectCiclo";
-import {ButtonFormulario} from "../Aspirante/Formulario/Informacion";
 import TextFields from "../TexFields";
 import {dataComprobanteCurp} from '../Aspirante/Reportes/comprobante';
 import Loaders from '../Loader';
@@ -123,7 +127,9 @@ function CurpDescargar(props) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">{"Reimprimir ficha"}</DialogTitle>
-                <DialogContent>
+                <DialogContent >
+                    <DialogContentText id="alert-dialog-description" >
+
                     <Formik
                         initialValues={{
                             curp:'',
@@ -136,19 +142,18 @@ function CurpDescargar(props) {
                             setSubmitting(false)
                         }}>
                         <Form>
-                            <LayoutForm>
-                                <div className={'box-width'}>
+                                <div style={{width:'300px',marginBottom:'7px'}}>
                                     <TextFields label={'Curp'} name={'curp'}/>
                                 </div>
-                            </LayoutForm>
-                            <Button type={"submit"} color="primary">
+                            <ButtonM type={"submit"} color="primary">
                                 Descargar
-                            </Button>
-                            <Button onClick={handleClose} color="primary">
+                            </ButtonM>
+                            <ButtonM onClick={handleClose} color="primary">
                                 Cerrar
-                            </Button>
+                            </ButtonM>
                         </Form>
                     </Formik>
+                    </DialogContentText>
                 </DialogContent>
             </Dialog>
         </div>

@@ -105,13 +105,16 @@ export default function MenuPasos() {
                         {headers: {'Content-Type': 'multipart/form-data'}}
                     ).then(() => {
                         //TODO:Imprimir pdf
+                        setIsLoader(true);
+
                         dataComprobante(FOLIO).then(() => {
                             enqueueSnackbar("Tus datos fueron registrados correctamente",
                                 {
                                     variant: 'success',
                                     preventDuplicate: true,
                                 })
-                        }).catch(() => alert("No pudimos generar tu comprobante"))
+                        }).catch(() => alert("No pudimos generar tu comprobante")).finally(()=>        setIsLoader(false)
+                    )
                     }).catch(() => {
                         enqueueSnackbar("Inténtelo más tarde, el servicio no está disponible.",
                             {
