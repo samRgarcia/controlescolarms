@@ -12,7 +12,6 @@ const SelecMunicipio = ({idEstados,label = '', ...props}) => {
     const [municipios, setMunicipios] = React.useState([])
 
     useEffect(() => {
-        console.log("muni",idEstados)
        idEstados &&  axios.get(LISTA_MUNICIPIOS,{params:{id:idEstados}})
             .then((res) => {
                 setMunicipios(res.data);

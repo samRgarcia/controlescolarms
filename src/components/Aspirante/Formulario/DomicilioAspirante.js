@@ -31,7 +31,7 @@ const Formularios = ({handleNext, setDataState, dataState}) => {
             validationSchema={Yup.object({
                 estado: Yup.number().required('Estado requerido'),
                 municipio: Yup.number().required('Municipio requerido'),
-                localidad: Yup.string().required('Localidad requerido'),
+                localidad: Yup.string().required('Localidad requerida'),
 
             })}
             onSubmit={(values, {setSubmitting}) => {
@@ -42,16 +42,16 @@ const Formularios = ({handleNext, setDataState, dataState}) => {
             <Form>
                 <LayoutForm>
                     <div className={'box-width'}>
-                        <TextFields label={"C.p"} name={"cp"} type={"text"} placeholder=".."/>
-                        <TextFields label={"Colonia"} name={"colonia"} type={"text"} placeholder=".."/>
+                        <TextFields label={"C.p."} name={"cp"} type={"text"} toUpperCase={true} placeholder=".."/>
+                        <TextFields label={"Colonia"} name={"colonia"} type={"text"} toUpperCase={true} placeholder=".."/>
                     </div>
                     <div className={'box-width'}>
-                        <TextFields label={"Calle y Numero"} name={"calleNumero"} type={"text"} placeholder=".."/>
+                        <TextFields label={"Calle y Numero"} name={"calleNumero"} toUpperCase={true} type={"text"} placeholder=".."/>
                         <SelecEstados setIdEstados={setIdEstados} label={'Estado*'} name={'estado'}/>
                     </div>
                     <div className={'box-width'}>
                         <SelecMunicipio idEstados={idEstados} label={'Municipio*'} name={'municipio'}/>
-                        <TextFields label={'Localidad*'} name={'localidad'}/>
+                        <TextFields label={'Localidad*'} name={'localidad'} toUpperCase={true}/>
                     </div>
                 </LayoutForm>
                 <ButtonFormulario/>

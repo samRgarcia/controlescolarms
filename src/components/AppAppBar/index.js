@@ -57,7 +57,7 @@ function AppAppBar(props) {
                         color="inherit"
                         className={classes.title}
                     >
-                        {'CENTRO DE BACHILLERATO TECNOLOGICO AGROPECUARIO No. 265'}
+                        {'CENTRO DE BACHILLERATO TECNOLÓGICO AGROPECUARIO No. 265'}
                     </h6>
                     <div className={classes.right}>
                         <Link

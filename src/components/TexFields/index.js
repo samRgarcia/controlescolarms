@@ -3,11 +3,10 @@ import TextField from '@material-ui/core/TextField';
 import {useField} from "formik";
 
 
-
 export default function TextFields({label = '', ...props}) {
     const [field, meta] = useField(props);
-    const [error, setError] = React.useState(false)
-    //const fieldValue = {...field, value: field.value.toUpperCase()}
+    //const [error, setError] = React.useState(false)
+    const fieldValue = {...field, value: props?.toUpperCase ? field.value.toUpperCase() : field.value}
     return (
         <>
             <TextField
@@ -16,7 +15,7 @@ export default function TextFields({label = '', ...props}) {
                 fullWidth
                 error={meta.touched && meta.error ? true : false}
                 label={label}
-                {...field}
+                {...fieldValue}
                 {...props}
                 helperText={meta.touched && meta.error ? meta.error : null}
             />

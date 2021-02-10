@@ -2,7 +2,7 @@ import jsPDF from "jspdf";
 import {format} from 'date-fns';
 import {logoSep} from './img';
 import axios from "axios";
-import {DOCUMENTO_COMPROBATE} from "../../../constant";
+import {DOCUMENTO_COMPROBATE, DOCUMENTO_COMPROBATE_CURP} from "../../../constant";
 
 export async function dataComprobante(folio) {
     await axios.get(DOCUMENTO_COMPROBATE,{
@@ -12,6 +12,21 @@ export async function dataComprobante(folio) {
     })
         .then(res=>{
             pdfComprobanteAspirantes(res.data)
+        })
+        .catch(error=>console.log(error))
+}
+export async function dataComprobanteCurp(curp) {
+    await axios.get(DOCUMENTO_COMPROBATE_CURP,{
+        params:{
+            curp:curp
+        }
+    })
+        .then(res=>{
+            if(res.data.length){
+                pdfComprobanteAspirantes(res.data)
+            }else {
+                alert('A un no se encuentra registrado.')
+            }
         })
         .catch(error=>console.log(error))
 }

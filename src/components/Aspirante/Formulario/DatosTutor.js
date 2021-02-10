@@ -25,8 +25,8 @@ const Formularios = ({handleNext, setDataState, dataState}) => {
             }}
             validationSchema={Yup.object({
                 nombre: Yup.string().required('Nombre requerido'),
-                telefono: Yup.number().required('Telefono requerido'),
-                direccion: Yup.string().required('Direccion requerido'),
+                telefono: Yup.number().required('Teléfono requerido'),
+                direccion: Yup.string().required('Dirección requerida'),
 
             })}
             onSubmit={(values, {setSubmitting}) => {
@@ -36,12 +36,12 @@ const Formularios = ({handleNext, setDataState, dataState}) => {
             <Form>
                 <LayoutForm>
                     <div className={'box-width'}>
-                        <TextFields label={"Nombre*"} name={"nombre"} type={"text"} placeholder=""/>
-                        <TextFields label={"Telefono*"} name={"telefono"} type={"number"} placeholder=""/>
+                        <TextFields label={"Nombre completo*"} name={"nombre"} type={"text"} toUpperCase={true} placeholder=""/>
+                        <TextFields label={"Teléfono*"} name={"telefono"} type={"number"} placeholder=""/>
                     </div>
                     <div className={'box-width'}>
-                        <TextFields label={"Correo"} name={"correo"} type={"email"} placeholder=""/>
-                        <TextFields label={"Direcion*"} name={"direccion"} type={"text"} placeholder=""/>
+                        <TextFields label={"Correo"} name={"correo"} type={"email"} toUpperCase={true} placeholder=""/>
+                        <TextFields label={"Direción*"} name={"direccion"} type={"text"} toUpperCase={true} placeholder=""/>
                     </div>
                 </LayoutForm>
                 <ButtonFormulario/>

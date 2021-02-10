@@ -12,7 +12,7 @@ const SelecCiclo = ({label = '', ...props}) => {
     const [ciclos, setCiclos] = React.useState([]);
 
     useEffect(() => {
-        axios.get(LISTA_CICLO).then((res) => {
+        axios.get(LISTA_CICLO,{params: {idCbtas: 1}}).then((res) => {
             setCiclos(res.data)
         })
             .catch(error => console.log(error))
@@ -29,7 +29,7 @@ const SelecCiclo = ({label = '', ...props}) => {
                 <option aria-label="None" value=""/>
                 {
                     ciclos.map(item=>{
-                        return <option key={item.id} value={item.id}>{item.nomciclo}</option>
+                        return <option key={item.id} value={item.id}>{`${item.nomciclo} ${item.catmodalidads.nommodalidad}`}</option>
                     })
                 }
             </Select>

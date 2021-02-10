@@ -1,6 +1,7 @@
 import React from "react";
 import Dashboard from '../Dashboard/index';
 import MenuCatalogos from "./MenuCatalogos";
+import {protectedPage} from "../../../childrens/auth";
 
 const AdminCatalogos=()=>{
     return (
@@ -10,4 +11,4 @@ const AdminCatalogos=()=>{
     )
 }
 
-export default AdminCatalogos;
+export default protectedPage(AdminCatalogos);

@@ -2,11 +2,11 @@ import React from "react";
 import Inicio from "./Inicio";
 import Aspirantes from '../components/Aspirante';
 import Login from "../components/Login";
-import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Administrador from "../components/Administrador";
 import ReportesListas from "../components/Administrador/Reportes";
 import {ProviderAuth} from '../Contex/authContext';
-import {PrivateRouter} from '../childrens/auth';
+import {protectedPage} from '../childrens/auth';
 import AdminCatalogos from "../components/Administrador/Catalogos";
 
 const Rutas = () => {
@@ -23,15 +23,15 @@ const Rutas = () => {
                     <Route path={'/login'}>
                         <Login/>
                     </Route>
-                    <PrivateRouter path={'/dashboard'}>
+                    <Route path={'/dashboard'}>
                         <Administrador/>
-                    </PrivateRouter>
-                    <PrivateRouter path={'/reporte/listas'}>
+                    </Route>
+                    <Route path={'/reporte/listas'}>
                         <ReportesListas/>
-                    </PrivateRouter>
-                    <PrivateRouter path={'/catalogos'}>
+                    </Route>
+                    <Route path={'/catalogos'}>
                         <AdminCatalogos/>
-                    </PrivateRouter>
+                    </Route>
                 </Switch>
             </Router>
         </ProviderAuth>

@@ -3,11 +3,11 @@ import {Formik, Form} from 'formik';
 import * as Yup from 'yup';
 import './css/datosPersonales.css'
 import LayoutForm from "../../../childrens/LayoutForm";
-import SelecModalidad from "../../Selects/SelectModalidad";
 import {ButtonFormulario, Informacion} from "./Informacion";
+import SelecCiclo from "../../Selects/SelectCiclo";
 
 //setDataState={setDataState} dataState={dataState}
-const Formularios = ({handleNext, setDataState, dataState,ciclos}) => {
+const Formularios = ({handleNext, setDataState, dataState}) => {
 
     const handlChange = (values) => {
         setDataState({
@@ -23,18 +23,16 @@ const Formularios = ({handleNext, setDataState, dataState,ciclos}) => {
                 ciclo:'',
             }}
             validationSchema={Yup.object({
-                modalidad: Yup.string().required('Modalidad requerida'),
+                ciclo: Yup.string().required('Ciclo requerido'),
             })}
             onSubmit={(values, {setSubmitting}) => {
-                values.ciclo=ciclos.id
                 handlChange(values);
                 setSubmitting(false)
             }}>
             <Form>
                 <LayoutForm>
                     <div className={'box-width'}>
-                        <SelecModalidad label={'Modalidad*'} name={'modalidad'}/>
-                        <VistaClico valueCiclo={ciclos.nombre}/>
+                        <SelecCiclo label={'Ciclo'} name={'ciclo'}/>
                     </div>
                 </LayoutForm>
                 <ButtonFormulario/>
@@ -42,14 +40,12 @@ const Formularios = ({handleNext, setDataState, dataState,ciclos}) => {
         </Formik>
     )
 }
-function VistaClico({valueCiclo}) {
-    return <h4 style={{width:'100%',textAlign:'center'}}>{valueCiclo || '--'}</h4>
-}
+
 //setDataState={setDataState} dataState={dataState}
-const DatosPeriodo = ({handleNext, setDataState, dataState,ciclos}) => {
+const DatosPeriodo = ({handleNext, setDataState, dataState}) => {
     return (<div>
         <Informacion/>
-        <Formularios handleNext={handleNext} setDataState={setDataState} dataState={dataState} ciclos={ciclos}/>
+        <Formularios handleNext={handleNext} setDataState={setDataState} dataState={dataState}/>
     </div>)
 }
 

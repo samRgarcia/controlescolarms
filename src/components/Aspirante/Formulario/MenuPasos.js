@@ -35,11 +35,10 @@ function getSteps() {
     return ['Periodo', 'Datos personales', 'Domicilio', 'Escuela Procedencia', 'Tutor', 'Carrera de interés'];
 }
 
-function getStepContent(stepIndex, handleNext, setDataState, dataState, ciclos, setFilePdf, filePdf) {
+function getStepContent(stepIndex, handleNext, setDataState, dataState, setFilePdf, filePdf) {
     switch (stepIndex) {
         case 0:
-            return <DatosPeriodo handleNext={handleNext} setDataState={setDataState} dataState={dataState}
-                                 ciclos={ciclos}/>;
+            return <DatosPeriodo handleNext={handleNext} setDataState={setDataState} dataState={dataState}/>;
         case 1:
             return <DatosPersonales handleNext={handleNext} setDataState={setDataState} dataState={dataState}
                                     setFilePdf={setFilePdf} filePdf={filePdf}/>;
@@ -71,7 +70,6 @@ export default function MenuPasos() {
     })
     const [activeStep, setActiveStep] = React.useState(0);
     const [isLoader, setIsLoader] = React.useState(false);
-    const [ciclos, setCiclos] = React.useState('');
     const [filePdf, setFilePdf] = React.useState(null);
 
     const steps = getSteps();
@@ -81,16 +79,6 @@ export default function MenuPasos() {
 
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
-    useEffect(() => {
-        axios.get(LISTA_CICLO, {params: {idCbtas: 1}})
-            .then(res => {
-                const [data] = res.data;
-                setCiclos({
-                    nombre: data?.nomciclo,
-                    id: data?.id
-                })
-            }).catch(error => console.log(error))
-    }, [])
 
     /*const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -181,7 +169,7 @@ export default function MenuPasos() {
                     ) : (
                         <div>
                             <Typography
-                                className={classes.instructions}>{getStepContent(activeStep, handleNext, setDataState, dataState, ciclos, setFilePdf, filePdf)}</Typography>
+                                className={classes.instructions}>{getStepContent(activeStep, handleNext, setDataState, dataState, setFilePdf, filePdf)}</Typography>
                             {/*<div>
                             <Button
                                 disabled={activeStep === 0}

@@ -11,13 +11,14 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {useHistory} from "react-router-dom";
+import {useHistory,useLocation} from "react-router-dom";
 import {Formik, Form} from 'formik';
 import * as Yup from 'yup';
 import TextFields from "../TexFields";
 import axios from "axios";
 import {useSnackbar} from 'notistack';
 import {VALIDAR_LOGIN} from "../../constant";
+import * as Auth from '../../services/AuthServices';
 import {setUserID, setToken, decodedToken, isExpired} from '../../services/AuthServices';
 
 function Copyright() {
@@ -53,10 +54,12 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
     const classes = useStyles();
     let history = useHistory();
+    let location =useLocation();
     const {enqueueSnackbar} = useSnackbar();
+    let { from } = location.state || { from: { pathname: "/dashboard" } };
 
     useEffect(() => {
-        if (!isExpired()) {
+        if (!Auth.isExpired()) {
             history.replace('/login')
         }
     }, [])
@@ -68,10 +71,11 @@ export default function Login() {
                 password: password
             })
             //console.log(res)
-            await setToken(res.data.token);
-            const {userId} = await decodedToken()
-            await setUserID(userId)
-            history.replace('/dashboard')
+             setToken(res.data.token);
+            const {userId} = decodedToken()
+             setUserID(userId)
+           //history.replace('/dashboard')
+            history.replace('/dashboard');
         } catch (e) {
             console.log(e)
             enqueueSnackbar('Usuario o contraseña incorrecta.',
@@ -107,14 +111,14 @@ export default function Login() {
                         }}
                     >
                         <Form>
-                            <TextFields label={'Usuario'} name={"usuario"} type={'text'}/>
-                            <TextFields label={'Contraseña'} name={"password"} type={'password'}/>
+                            <TextFields label={'Usuario'} name={"usuario"} type={'text'} placeholder={"miusuario@gmail.com"} />
+                            <TextFields label={'Contraseña'} name={"password"} type={'password'} placeholder={"*********"}/>
 
-                            <FormControlLabel
+                            {/*<FormControlLabel
                                 disabled
                                 control={<Checkbox value="remember" color="primary"/>}
                                 label="Remember me"
-                            />
+                            />*/}
                             <Button
                                 type="submit"
                                 fullWidth
@@ -127,7 +131,7 @@ export default function Login() {
                         </Form>
                     </Formik>
 
-                    <Grid container>
+                    {/*<Grid container>
                         <Grid item xs>
                             <Link href="#" variant="body2">
                                 Forgot password?
@@ -138,7 +142,7 @@ export default function Login() {
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>
-                    </Grid>
+                    </Grid>*/}
                 </div>
             </div>
             <Box mt={8}>

@@ -1,23 +1,24 @@
 import React, {useEffect, useState} from "react";
-import {Route, Redirect, useH, useHistory} from 'react-router-dom';
+import {Route, Redirect, useHistory, useLocation} from 'react-router-dom';
 import {useAuth} from '../../Contex/authContext';
 
-export function PrivateRouter({children, ...rest}) {
-    let history = useHistory();
-
-    const [shouldRender, setShouldRender] = useState(false);
+export const protectedPage = (Component) => (props) => {
     let {loading: authLoading, checkAuth, isLoggedIn} = useAuth();
+    let history = useHistory();
+    const [shouldRender, setShouldRender] = useState(false);
 
+    console.log('push')
     useEffect(() => {
         checkAuth();
         if (!authLoading && !isLoggedIn) {
-            history.replace('/login')
-            setShouldRender(false)
+                history.replace('/login')
+
+            setShouldRender(false);
         } else {
             isLoggedIn && setShouldRender(true)
         }
-    }, [isLoggedIn, authLoading])
+    }, [isLoggedIn, authLoading,setShouldRender]);
 
-    return ((!authLoading && shouldRender && <Route {...rest} render={() => (children)}></Route>) || null)
+    return ((!authLoading && shouldRender && <Component {...props} />) || null)
 }
 

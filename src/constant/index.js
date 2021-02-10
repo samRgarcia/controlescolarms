@@ -11,6 +11,8 @@ export const LISTA_REGIMEN = '/api/fichas/get/lista/regimen';
 export const LISTA_CARRERAS_INTERES = '/api/fichas/get/lista/carrera-interes';
 export const DOCUMENTO_CONSTANCIA = '/constancias';
 export const DOCUMENTO_COMPROBATE = '/api/fichas/comprobante';
+export const DOCUMENTO_COMPROBATE_CURP = '/api/fichas/comprobante-curp';
+
 
 //Administrador
 export const ADMIN_LISTA_CAT_MODALIDAD = '/api/administrador/modalidad';

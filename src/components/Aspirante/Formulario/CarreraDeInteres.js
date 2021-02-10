@@ -4,26 +4,23 @@ import * as Yup from 'yup';
 import './css/datosPersonales.css'
 import LayoutForm from "../../../childrens/LayoutForm";
 import SelecCarreraInteres from "../../Selects/SelectCarreraInteres";
-import {Button} from "@material-ui/core";
 import {ButtonFormulario, Informacion} from "./Informacion";
-import TextFields from "../../TexFields";
 
-//setDataState={setDataState} dataState={dataState}
-const Formularios = ({handleNext,setDataState,dataState}) => {
+const Formularios = ({handleNext, setDataState, dataState}) => {
     const handlChange = (values) => {
         setDataState({
             ...dataState,
-            infCarrera:values
+            infCarrera: values
         })
         handleNext()
     }
     return (
         <Formik
             initialValues={{
-                carreraInteres:'',
+                carreraInteres: '',
             }}
             validationSchema={Yup.object({
-                carreraInteres: Yup.string().required('Carrera de insteres requerido'),
+                carreraInteres: Yup.string().required('Carrera de insterés requerido'),
             })}
             onSubmit={(values, {setSubmitting}) => {
                 //console.log(JSON.stringify(values, null, 2))
@@ -33,7 +30,7 @@ const Formularios = ({handleNext,setDataState,dataState}) => {
             <Form>
                 <LayoutForm>
                     <div className={'box-width'}>
-                        <SelecCarreraInteres label={'Carrera de interes*'} name={'carreraInteres'}/>
+                        <SelecCarreraInteres label={'Carrera de interés*'} name={'carreraInteres'}/>
                     </div>
                 </LayoutForm>
                 <ButtonFormulario/>
@@ -41,8 +38,7 @@ const Formularios = ({handleNext,setDataState,dataState}) => {
         </Formik>
     )
 }
-//setDataState={setDataState} dataState={dataState}
-const DatosCarrera = ({handleNext,setDataState,dataState}) => {
+const DatosCarrera = ({handleNext, setDataState, dataState}) => {
     return (<div>
         <Informacion/>
         <Formularios handleNext={handleNext} setDataState={setDataState} dataState={dataState}/>

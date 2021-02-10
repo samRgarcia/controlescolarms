@@ -1,9 +1,11 @@
 import React from "react";
 import {ListTabla} from './TableLista';
 import Dashboard from "../Dashboard/index";
+import {protectedPage} from '../../../childrens/auth';
 
-export default function ReportesListas() {
+ function ReportesListas() {
     return <Dashboard>
         <ListTabla/>
     </Dashboard>
 }
+export default protectedPage(ReportesListas);

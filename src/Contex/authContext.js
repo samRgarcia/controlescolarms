@@ -2,7 +2,14 @@ import React, {useContext, useCallback, useEffect, useMemo} from "react";
 import {getUserID, getToken, isValid} from '../services/AuthServices';
 import axios from "axios";
 
-const authContext = React.createContext();
+const AuthContext = React.createContext({
+    setUser: undefined,
+    isLoggedIn: false,
+    loading: false,
+    logOut: () => {
+    },
+    checkAuth: () => {
+    },});
 
 export function ProviderAuth({children}) {
     const [loading, setLoading] = React.useState(true);
@@ -41,7 +48,7 @@ export function ProviderAuth({children}) {
     }, [user])
 
     return (
-        <authContext.Provider value={{
+        <AuthContext.Provider value={{
             loading: isLoading,
             isLoggedIn,
             userID: loggedUserID,
@@ -49,10 +56,10 @@ export function ProviderAuth({children}) {
             logOut
         }}>
             {children}
-        </authContext.Provider>
+        </AuthContext.Provider>
     );
 }
 
 export function useAuth() {
-    return useContext(authContext);
+    return useContext(AuthContext);
 }
