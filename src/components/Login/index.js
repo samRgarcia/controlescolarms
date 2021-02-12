@@ -60,7 +60,7 @@ export default function Login() {
 
     useEffect(() => {
         if (!Auth.isExpired()) {
-            history.replace('/login')
+            history.replace('/dashboard')
         }
     }, [])
 
@@ -71,9 +71,9 @@ export default function Login() {
                 password: password
             })
             //console.log(res)
-             setToken(res.data.token);
-            const {userId} = decodedToken()
-             setUserID(userId)
+            await setToken(res.data.token);
+            const {userId} = await decodedToken()
+           await  setUserID(userId)
            //history.replace('/dashboard')
             history.replace('/dashboard');
         } catch (e) {

@@ -1,7 +1,7 @@
 import React from "react";
 import Dashboard from '../Dashboard/index';
 import MenuCatalogos from "./MenuCatalogos";
-import {protectedPage} from "../../../childrens/auth";
+import {protectedPage} from "../../../Contex/authContext";
 
 const AdminCatalogos=()=>{
     return (

@@ -1,6 +1,6 @@
 import React from "react";
 import LoyautDaschboard from "./Dashboard";
-import {protectedPage} from "../../childrens/auth";
+import {protectedPage} from "../../Contex/authContext";
 
 const Admin =()=>{
     return(<LoyautDaschboard/>)

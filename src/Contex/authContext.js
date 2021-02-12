@@ -1,6 +1,7 @@
-import React, {useContext, useCallback, useEffect, useMemo} from "react";
+import React, {useContext, useCallback, useEffect, useMemo, useState} from "react";
 import {getUserID, getToken, isValid} from '../services/AuthServices';
 import axios from "axios";
+import {useHistory} from "react-router-dom";
 
 const AuthContext = React.createContext({
     setUser: undefined,
@@ -11,7 +12,7 @@ const AuthContext = React.createContext({
     checkAuth: () => {
     },});
 
-export function ProviderAuth({children}) {
+ function ProviderAuth({children}) {
     const [loading, setLoading] = React.useState(true);
     const [user, setUser] = React.useState(undefined)
     const [logged, setLogged] = React.useState(false);
@@ -61,5 +62,32 @@ export function ProviderAuth({children}) {
 }
 
 export function useAuth() {
-    return useContext(AuthContext);
+    const authContext= useContext(AuthContext);
+    return authContext;
 }
+
+export const protectedPage = (Component) => (props) => {
+    let history = useHistory();
+    let {loading: authLoading, checkAuth, isLoggedIn} = useAuth();
+    const [shouldRender, setShouldRender] = useState(false);
+
+    useEffect(() => {
+        checkAuth();
+
+        if (!authLoading && !isLoggedIn) {
+            console.log('authLoading',!authLoading)
+            console.log('isLoggedIn',!isLoggedIn)
+
+            history.replace('/login')
+
+            setShouldRender(false);
+        } else {
+            console.log(isLoggedIn,'isLogge')
+            isLoggedIn && setShouldRender(true)
+        }
+    }, [isLoggedIn, authLoading]);
+
+    return ((!authLoading && shouldRender && <Component {...props} />) || null)
+}
+
+export default ProviderAuth;

@@ -1,7 +1,7 @@
 import React from "react";
 import {ListTabla} from './TableLista';
 import Dashboard from "../Dashboard/index";
-import {protectedPage} from '../../../childrens/auth';
+import {protectedPage} from '../../../Contex/authContext';
 
  function ReportesListas() {
     return <Dashboard>
