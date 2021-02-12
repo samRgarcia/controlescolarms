@@ -75,14 +75,9 @@ export const protectedPage = (Component) => (props) => {
         checkAuth();
 
         if (!authLoading && !isLoggedIn) {
-            console.log('authLoading',!authLoading)
-            console.log('isLoggedIn',!isLoggedIn)
-
             history.replace('/login')
-
             setShouldRender(false);
         } else {
-            console.log(isLoggedIn,'isLogge')
             isLoggedIn && setShouldRender(true)
         }
     }, [isLoggedIn, authLoading]);

@@ -29,6 +29,9 @@ const Rutas = () => {
                     <Route path={'/catalogos'}>
                         <AdminCatalogos/>
                     </Route>
+                    <Route path="*">
+                        <Login/>
+                    </Route>
                 </Switch>
             </Router>
     )
