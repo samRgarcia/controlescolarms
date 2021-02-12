@@ -18,5 +18,17 @@ export const DOCUMENTO_COMPROBATE_CURP = '/api/fichas/comprobante-curp';
 export const ADMIN_LISTA_CAT_MODALIDAD = '/api/administrador/modalidad';
 export const ADMIN_REGIS_CAT_MODALIDAD = '/api/administrador/modalidad/add';
 export const ADMIN_ACTU_CAT_MODALIDAD = '/api/administrador/modalidad/update';
-export const ADMIN_ELMIN_CAT_MODALIDAD='/api/administrador/modalidad/delete';
+export const ADMIN_ELMIN_CAT_MODALIDAD = '/api/administrador/modalidad/delete';
+
+export const ADMIN_LISTA_CAT_CICLO = '/api/administrador/ciclos';
+export const ADMIN_REGIS_CAT_CICLO = '/api/administrador/ciclos/add';
+export const ADMIN_ACTU_CAT_CICLO = '/api/administrador/ciclos/update';
+export const ADMIN_ELMIN_CAT_CICLO = '/api/administrador/ciclos/delete';
+
+export const ADMIN_LISTA_CAT_CARRERA = '/api/administrador/carreras';
+export const ADMIN_REGIS_CAT_CARRERA = '/api/administrador/carreras/add';
+export const ADMIN_ACTU_CAT_CARRERA = '/api/administrador/carreras/update';
+export const ADMIN_ELMIN_CAT_CARRERA = '/api/administrador/carreras/delete';
+
+
 
