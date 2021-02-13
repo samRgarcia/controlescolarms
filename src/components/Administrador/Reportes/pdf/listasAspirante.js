@@ -18,7 +18,12 @@ export function pdfListaAspirantes(data) {
         {
             margin: { bottom: 50,top:35 },
             styles: { halign:'center',cellPadding: 0.5, fontSize: 7 },
-            columnStyles: { 2: { halign: 'left', cellWidth:85 } },
+            columnStyles: {
+                0: { halign: 'left' },
+                1: { halign: 'left',textTransform: 'upperCase' },
+                2: { halign: 'left',textTransform: 'uppercase' }
+
+            },
             headStyles:{
                 fillColor:null ,
                 textColor:'black',

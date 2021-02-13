@@ -8,14 +8,12 @@ import Backg from '../../Img/back.jpg';
 import {
     Button as ButtonM,
     Dialog,
-    DialogActions,
     DialogContent,
     DialogContentText,
     DialogTitle
 } from '@material-ui/core';
 import * as Yup from "yup";
 import {Form, Formik} from "formik";
-import LayoutForm from "../../childrens/LayoutForm";
 import TextFields from "../TexFields";
 import {dataComprobanteCurp} from '../Aspirante/Reportes/comprobante';
 import Loaders from '../Loader';
