@@ -30,5 +30,7 @@ export const ADMIN_REGIS_CAT_CARRERA = '/api/administrador/carreras/add';
 export const ADMIN_ACTU_CAT_CARRERA = '/api/administrador/carreras/update';
 export const ADMIN_ELMIN_CAT_CARRERA = '/api/administrador/carreras/delete';
 
+export const ADMIN_DESCARGAR_CONSTANCIA = '/api/administrador/solicitar/constacia';
+
 
 

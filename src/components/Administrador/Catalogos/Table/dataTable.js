@@ -68,6 +68,9 @@ export default function DataTable({data, setData, load, columns, Title, tipocat 
                         editTooltip:'Modificar',
                         deleteTooltip:'Eliminar'
                         },
+                    header:{
+                        actions:'Acción'
+                    }
 
                 }
             }
